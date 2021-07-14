@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="big-5"> 
-<title>肈ヘ玻ネ竟</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+    <title>題目產生器</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
    
-});
-$('.text').on('click', mySomeFunction);
-function myFunction() {
-  document.getElementById("display").innerHTML = "Hi One"+getRandomInt(3);
-}
-function myFunction2() {
-  document.getElementById("display").innerHTML = "Hi Two"+getRandomInt(3);
-}
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+    });
+    $('.text').on('click', mySomeFunction);
+    function clear() {
+        document.getElementById("display").innerHTML = "";
+    }
+    function showType1() {
+      document.getElementById("display").innerHTML = "Hi One"+getRandomInt(3);
+    }
+    function showType2() {
+      document.getElementById("display").innerHTML = "Hi Two"+getRandomInt(3);
+    }
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
 </script>
 </head>
 <body>
     <p>
-        <span onclick="myFunction()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">玻ネ璸衡肈</span>&nbsp;
-        <span onclick="myFunction2()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">玻ネ莱ノ肈</span>&nbsp;
+        <span onclick="showType1()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生計算題</span>&nbsp;
+        <span onclick="showType2()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生應用題</span>&nbsp;
     </p>
 <h2 style="color: #2e6c80;" id='display'></h2>
 </body>
