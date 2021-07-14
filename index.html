@@ -8,25 +8,184 @@
     $(document).ready(function() {
    
     });
-    $('.text').on('click', mySomeFunction);
-    function clear() {
-        document.getElementById("display").innerHTML = "";
-    }
     function showType1() {
-      document.getElementById("display").innerHTML = "Hi One"+getRandomInt(3);
+        var question = "";
+        for (var i = 1; i < 11; i++) {
+            question += "Q" + i+" : ";
+            question += CalculateCenter();
+            question += "<br>"; //換行
+        }
+        document.getElementById("display").innerHTML = question;
     }
+
     function showType2() {
-      document.getElementById("display").innerHTML = "Hi Two"+getRandomInt(3);
+        document.getElementById("display").innerHTML = getAppliQues();
     }
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * max);
+
+    function CalculateCenter() {
+        var retStr = "";
+        var NumberA = getRandomInt(11, 99);
+        var type;
+        
+        type = getRandomInt(0,10);
+        if (type >= 5) {
+            // A需要小於90 尾數不可為0、1
+            var j = getRandomInt(1, 8);//1-8
+            if (NumberA >= 90)//Ａ是9x
+            {
+                NumberA = (NumberA - 90) + (j * 10);//Ａ-90加上隨機十位數
+            }
+            if (NumberA % 10 <= 1)//不能是1 , 0
+            {
+                
+                var m = getRandomInt(2, 9);//各位數2-9
+                NumberA = NumberA - (NumberA % 10) + m;//如果A個位數是1就重新random加上去
+            }
+
+            var n = getRandomInt(11 - (NumberA % 10), 9);//ran一個個位數 2搭配9以上 3搭配8以上(11-2=9,11-9=2
+            var b = getRandomInt(0, 9 - ((NumberA - (NumberA % 10)) / 10));//ran一個十位數0~9-A的十位數
+            NumberB = (b * 10) + n;
+
+            retStr += NumberA + " + " + NumberB + " = " + (NumberA + NumberB)
+
+        } else {
+            if (NumberA % 10 == 9) {//如果A的個位數＝9強制-1
+                NumberA = NumberA - 1;
+            }
+            var j = getRandomInt(11, NumberA - 1);
+
+            if (NumberA - (NumberA % 10) == j - (j % 10)) {
+
+                j = j - 10;
+            }
+
+            var k = getRandomInt(NumberA % 10 + 1, 9);
+            NumberB = j - (j % 10) + k;
+
+            retStr += NumberA + " - " + NumberB + " = " + (NumberA - NumberB)
+        }
+
+        return retStr;
+    }
+    function gettwoName(j,names)
+    {
+        var twoNum = getRandomInt(0, names.length - 2);
+        var twoName = j + twoNum;
+        if (j + twoNum > names.length) {
+            twoName = twoName - names.length;
+        };
+        return twoName;
+    }
+    
+    function getAppliQues() {
+        var retStr,NumberA, NumberB, NumberC, RdName, twoName;
+        var names = [
+            "小明",
+            "小羽",
+            "小強",
+            "翔翔",
+            "小哲",
+            "國國",
+            "宏明",
+            "偉霖",
+            "小武",
+            "小美",
+
+            "美美",
+            "小雯",
+            "小菲",
+            "薇薇",
+            "琳琳",
+            "小蘭",
+            "千千",
+            "夢夢"
+        ];
+        var unit = [
+            "本",
+            "顆",
+            "串",
+            "籃",
+            "束",
+
+            "輛",
+            "包",
+            "張",
+            "疊"
+        ];
+        var objects = [
+            "書",
+            "蘋果",
+            "香蕉",
+            "草莓",
+            "花",
+
+            "車",
+            "貓砂",
+            "門票",
+            "考卷"
+        ];
+
+        var Qtype = getRandomInt(1, 4);//含前面不含後面
+        var i = getRandomInt(0, unit.length - 1);//單位＋物品
+        RdName = getRandomInt(0, names.length - 1);//名字
+        var ans1;
+        var ans2;
+        switch (Qtype) {
+
+            case 1:
+
+                //商店裡有27(A)本書，先賣出了12(B)本，又賣了5(C)本，一共賣了幾本書？現在還有幾本書？
+                NumberA = getRandomInt(11, 99);
+                NumberB = getRandomInt(1, NumberA);
+                NumberC = getRandomInt(1, NumberA - NumberB);
+                ans1 = NumberB + NumberC;
+                ans2 = NumberA - ans1;
+                retStr = "商店裡有" + NumberA + unit[i] + objects[i] + "，先賣出了" + NumberB + unit[i] + objects[i] + "，又賣了" + NumberC + unit[i] + objects[i] + "，請問一共賣了幾" + unit[i] + objects[i] + "？現在還有幾" + unit[i] + objects[i] + "？<br>" + "答案：(1)" + ans1 + unit[i] + "(2)" + ans2 + unit[i] + "。";
+
+
+                break;
+
+            case 2:
+                //小芳有13（Ａ）顆星，小蘭給了小芳5（Ｂ）顆後就和小芳一樣多，小蘭有幾顆星？
+                NumberB = getRandomInt(11, 99);
+                NumberA = getRandomInt(1, NumberB);
+                twoName = gettwoName(RdName, names);
+
+                ans1 = NumberA + NumberB;
+                retStr = "" + names[RdName] + "有" + NumberA + unit[i] + objects[i] + "," + names[twoName] + "給了" + names[RdName] + NumberB + unit[i] + objects[i] + "後就和" + names[RdName] + "一樣多，" + names[twoName] + "有幾" + unit[i] + objects[i] + "?<br>" + "答案：" + ans1 + unit[i] + "。";
+
+
+                break;
+
+            case 3:
+                //外公有19包糖，給了明明和強強各6包後，還有幾包？
+                NumberA = getRandomInt(11, 99);
+                NumberB = getRandomInt(1, NumberA / 2 - 1);
+                twoName = gettwoName(RdName, names);
+                ans1 = NumberA - (NumberB * 2);
+                retStr = "外公有" + NumberA + unit[i] + objects[i] + "，給了" + names[RdName] + "和" + names[twoName] + "各" + NumberB + unit[i] + "後，還有幾" + unit[i] + "?<br>" + "答案：" + ans1 + unit[i] + "。";
+                break;
+
+
+            case 4:
+                // 藍藍、玲玲、小胖每人做了15朵紅花，他們一共做了幾朵紅花？
+
+                break;
+
+        }
+        return retStr;
+    }
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
     }
 </script>
 </head>
 <body>
     <p>
-        <span onclick="showType1()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生計算題</span>&nbsp;
-        <span onclick="showType2()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生應用題</span>&nbsp;
+        <button onclick="showType1()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生計算題</button>&nbsp;
+        <button onclick="showType2()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生應用題</button>&nbsp;
     </p>
 <h2 style="color: #2e6c80;" id='display'></h2>
 </body>
