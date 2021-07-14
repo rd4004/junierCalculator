@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Try jQuery Online</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>$(document).ready(function () {
-            $("em").addClass("selected");
-            $("#myid").addClass("highlight");
-        });</script>
-    <style>
-        .selected {
-            color: red;
-        }
-
-        .highlight {
-            background: yellow;
-        }
-    </style>
+<meta charset="big-5"> 
+<title>題目產生器</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+   
+});
+$('.text').on('click', mySomeFunction);
+function myFunction() {
+  document.getElementById("display").innerHTML = "Hi One"+getRandomInt(3);
+}
+function myFunction2() {
+  document.getElementById("display").innerHTML = "Hi Two"+getRandomInt(3);
+}
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+</script>
 </head>
 <body>
-    <em title="Bold and Brave">This is first paragraph.</em>
-    <p id="myid">This is second paragraph.aaaaws</p>
+    <p>
+        <span onclick="myFunction()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生計算題</span>&nbsp;
+        <span onclick="myFunction2()" style="background-color: #2b2301; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">產生應用題</span>&nbsp;
+    </p>
+<h2 style="color: #2e6c80;" id='display'></h2>
 </body>
 </html>
